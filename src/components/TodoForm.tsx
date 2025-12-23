@@ -14,22 +14,16 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
     setInputValue(value)
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e?: any) => {
+    e?.preventDefault?.()
     if (inputValue.trim()) {
       onAddTodo(inputValue)
       setInputValue('')
     }
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter' && inputValue.trim()) {
-      e.preventDefault()
-      handleSubmit()
-    }
-  }
-
   return (
-    <div className="todo-form-container" onKeyDown={handleKeyDown}>
+    <form className="todo-form-container" onSubmit={handleSubmit}>
       <ModusWcTextInput
         className="todo-form-input"
         placeholder="Add a new todo..."
@@ -38,6 +32,7 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
         aria-label="New todo input"
       />
       <ModusWcButton
+        type="submit"
         color="primary"
         variant="filled"
         onButtonClick={handleSubmit}
@@ -45,7 +40,7 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
       >
         Add Todo
       </ModusWcButton>
-    </div>
+    </form>
   )
 }
 

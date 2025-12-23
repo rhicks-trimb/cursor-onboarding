@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ModusWcTypography } from '@trimble-oss/moduswebcomponents-react'
 import { Todo } from './types/todo'
 import TodoHeader from './components/TodoHeader'
 import TodoForm from './components/TodoForm'
@@ -50,7 +51,9 @@ const App = () => {
   return (
     <div className="app-container">
       <div className="app-content">
-        <h1 className="app-title">My Todo List</h1>
+        <ModusWcTypography hierarchy="h1" size="2xl" weight="semibold" className="app-title">
+          My Todo List
+        </ModusWcTypography>
         <TodoHeader
           completedCount={completedCount}
           totalCount={totalCount}

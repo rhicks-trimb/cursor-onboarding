@@ -1,7 +1,7 @@
 .app-container {
   min-height: 100vh;
-  padding: 2rem;
-  background-color: var(--modus-body-bg, #f5f5f5);
+  padding: var(--modus-wc-spacing-xl);
+  background-color: var(--modus-wc-color-base-page);
 }
 
 .app-content {
@@ -10,16 +10,15 @@
 }
 
 .app-title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
-  color: var(--modus-body-color, #252a2e);
+  margin-bottom: var(--modus-wc-spacing-xl);
+  color: var(--modus-wc-color-base-content);
 }
 
 .todo-form-container {
   display: flex;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
+  gap: var(--modus-wc-spacing-md);
+  margin-bottom: var(--modus-wc-spacing-xl);
+  align-items: center;
 }
 
 .todo-form-input {
@@ -29,17 +28,22 @@
 .todo-list-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--modus-wc-spacing-md);
+}
+
+.todo-list-empty {
+  display: block;
 }
 
 .todo-item-card {
   margin-bottom: 0;
+  --padding-card: 1rem;
 }
 
 .todo-item-content {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--modus-wc-spacing-md);
   width: 100%;
 }
 
@@ -50,6 +54,7 @@
 .todo-item-text {
   flex: 1;
   word-break: break-word;
+  color: var(--modus-wc-color-base-content);
 }
 
 .todo-item-text.completed {
@@ -59,7 +64,7 @@
 
 .todo-item-actions {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--modus-wc-spacing-xs);
   flex-shrink: 0;
 }
 
@@ -67,13 +72,19 @@
   flex: 1;
 }
 
+.todo-item-edit-form {
+  display: flex;
+  gap: var(--modus-wc-spacing-xs);
+  width: 100%;
+  align-items: center;
+}
+
 .todo-header-container {
-  margin-bottom: 2rem;
+  margin-bottom: var(--modus-wc-spacing-xl);
 }
 
 .todo-header-stats {
-  margin-top: 1rem;
-  font-size: 0.875rem;
-  color: var(--modus-body-color, #252a2e);
+  margin-top: var(--modus-wc-spacing-md);
+  color: var(--modus-wc-color-base-content);
 }
 

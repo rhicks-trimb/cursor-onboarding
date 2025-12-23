@@ -4,6 +4,7 @@ import { ModusWcCard } from '@trimble-oss/moduswebcomponents-react'
 import { ModusWcCheckbox } from '@trimble-oss/moduswebcomponents-react'
 import { ModusWcButton } from '@trimble-oss/moduswebcomponents-react'
 import { ModusWcTextInput } from '@trimble-oss/moduswebcomponents-react'
+import { ModusWcTypography } from '@trimble-oss/moduswebcomponents-react'
 
 interface TodoItemProps {
   todo: Todo
@@ -23,7 +24,7 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
     }
   }
 
-  const handleEditClick = () => {
+  const handleEditClick = (e?: any) => {
     setIsEditing(true)
     setEditValue(todo.text)
   }
@@ -33,38 +34,33 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
     setEditValue(value)
   }
 
-  const handleSaveEdit = () => {
+  const handleSaveEdit = (e?: any) => {
+    e?.preventDefault?.()
     if (editValue.trim()) {
       onUpdate(todo.id, editValue)
       setIsEditing(false)
     }
   }
 
-  const handleCancelEdit = () => {
+  const handleCancelEdit = (e?: any) => {
+    e?.preventDefault?.()
     setIsEditing(false)
     setEditValue(todo.text)
   }
 
-  const handleDelete = () => {
+  const handleDelete = (e?: any) => {
+    e?.preventDefault?.()
     onDelete(todo.id)
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter' && editValue.trim()) {
-      e.preventDefault()
-      handleSaveEdit()
-    } else if (e.key === 'Escape') {
-      e.preventDefault()
-      handleCancelEdit()
-    }
+  const handleEditFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    handleSaveEdit()
   }
 
   return (
-    <ModusWcCard className="todo-item-card">
-      <div 
-        className="todo-item-content"
-        onKeyDown={isEditing ? handleKeyDown : undefined}
-      >
+    <ModusWcCard className="todo-item-card" bordered={false}>
+      <div className="todo-item-content">
         <ModusWcCheckbox
           className="todo-item-checkbox"
           value={todo.completed}
@@ -72,7 +68,7 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
           aria-label={`Mark "${todo.text}" as ${todo.completed ? 'incomplete' : 'complete'}`}
         />
         {isEditing ? (
-          <>
+          <form className="todo-item-edit-form" onSubmit={handleEditFormSubmit}>
             <ModusWcTextInput
               className="todo-item-edit-input"
               value={editValue}
@@ -81,8 +77,9 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
             />
             <div className="todo-item-actions">
               <ModusWcButton
-                color="primary"
-                variant="filled"
+                type="submit"
+                color="tertiary"
+                variant="outlined"
                 size="sm"
                 onButtonClick={handleSaveEdit}
                 aria-label="Save edit"
@@ -90,7 +87,8 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
                 Save
               </ModusWcButton>
               <ModusWcButton
-                color="secondary"
+                type="button"
+                color="tertiary"
                 variant="outlined"
                 size="sm"
                 onButtonClick={handleCancelEdit}
@@ -99,15 +97,15 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
                 Cancel
               </ModusWcButton>
             </div>
-          </>
+          </form>
         ) : (
           <>
-            <span
+            <div 
               className={`todo-item-text ${todo.completed ? 'completed' : ''}`}
               onClick={handleEditClick}
               style={{ cursor: 'pointer' }}
               tabIndex={0}
-              onKeyDown={(e) => {
+              onKeyDown={(e: React.KeyboardEvent) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault()
                   handleEditClick()
@@ -115,11 +113,13 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
               }}
               aria-label={`Todo: ${todo.text}. Press Enter or Space to edit.`}
             >
-              {todo.text}
-            </span>
+              <ModusWcTypography hierarchy="p">
+                {todo.text}
+              </ModusWcTypography>
+            </div>
             <div className="todo-item-actions">
               <ModusWcButton
-                color="secondary"
+                color="tertiary"
                 variant="outlined"
                 size="sm"
                 onButtonClick={handleEditClick}
@@ -128,8 +128,8 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
                 Edit
               </ModusWcButton>
               <ModusWcButton
-                color="danger"
-                variant="filled"
+                color="tertiary"
+                variant="outlined"
                 size="sm"
                 onButtonClick={handleDelete}
                 aria-label={`Delete "${todo.text}"`}

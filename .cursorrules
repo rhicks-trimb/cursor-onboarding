@@ -1,0 +1,18 @@
+# Modus 2.0 Project Rules
+
+## Setup Requirements
+- [cite_start]**Theme Wrapper**: All apps MUST be wrapped in `<ModusWcThemeProvider>` in `main.tsx`[cite: 46, 53].
+- [cite_start]**CSS Order**: Import `@trimble-oss/moduswebcomponents/modus-wc-styles.css` BEFORE Tailwind in `index.css`[cite: 60, 63].
+- [cite_start]**Icons**: Use the jsDelivr CDN for Modus icons: `https://cdn.jsdelivr.net/npm/@trimble-oss/modus-icons@1/dist/modus-outlined/fonts/modus-icons.woff2`[cite: 71, 154].
+
+## Component Usage & Event Handling
+- **Text Inputs**: Use `<ModusWcTextInput>`. [cite_start]Access values via `e.detail?.target?.value`[cite: 73, 74].
+- [cite_start]**Buttons**: Use `<ModusWcButton>` with the `onButtonClick` prop (NOT `onClick`)[cite: 86].
+- [cite_start]**Checkboxes**: Use `<ModusWcCheckbox>` with `onInputChange`[cite: 89, 90].
+- [cite_start]**Typography**: Always use the `<ModusWcTypography>` component for text[cite: 145].
+
+## Design & Styling
+- **Colors**: NEVER use hex codes. [cite_start]Use CSS variables: `--modus-wc-color-base-page` (background), `--modus-wc-color-base-content` (text), and `--modus-wc-color-base-100` (cards)[cite: 137, 139, 151].
+- [cite_start]**Layout**: Use `bordered={false}` for cards by default[cite: 159].
+- [cite_start]**Spacing**: Set `--padding-card` to `1rem` and use `var(--modus-wc-spacing-xl)` for vertical card margins[cite: 152, 153].
+- [cite_start]**Buttons**: Default to tertiary style; only one primary button per page[cite: 141, 142].

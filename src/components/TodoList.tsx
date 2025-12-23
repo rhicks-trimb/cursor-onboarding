@@ -1,3 +1,4 @@
+import { ModusWcTypography } from '@trimble-oss/moduswebcomponents-react'
 import { Todo } from '../types/todo'
 import TodoItem from './TodoItem'
 
@@ -11,9 +12,13 @@ interface TodoListProps {
 const TodoList = ({ todos, onToggleTodo, onUpdateTodo, onDeleteTodo }: TodoListProps) => {
   if (todos.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
+      <ModusWcTypography 
+        hierarchy="p" 
+        className="todo-list-empty"
+        style={{ textAlign: 'center', padding: 'var(--modus-wc-spacing-xl)', color: 'var(--modus-wc-color-base-content)' }}
+      >
         No todos yet. Add one above to get started!
-      </div>
+      </ModusWcTypography>
     )
   }
 
