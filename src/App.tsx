@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ModusWcNavbar } from '@trimble-oss/moduswebcomponents-react'
-import { ModusWcThemeSwitcher } from '@trimble-oss/moduswebcomponents-react'
+import { ModusWcSwitch } from '@trimble-oss/moduswebcomponents-react'
 import { ModusWcTypography } from '@trimble-oss/moduswebcomponents-react'
 import { Todo } from './types/todo'
 import TodoHeader from './components/TodoHeader'
@@ -10,6 +10,52 @@ import './App.css'
 
 const App = () => {
   const [todos, setTodos] = useState<Todo[]>([])
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  // Initialize theme from localStorage or default to light
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('modus-theme-config')
+    if (savedTheme) {
+      try {
+        const themeConfig = JSON.parse(savedTheme)
+        const isDark = themeConfig.mode === 'dark'
+        setIsDarkMode(isDark)
+        updateTheme(isDark)
+      } catch (e) {
+        // Invalid saved theme, use default
+        updateTheme(false)
+      }
+    } else {
+      updateTheme(false)
+    }
+  }, [])
+
+  const updateTheme = (dark: boolean) => {
+    const html = document.documentElement
+    if (dark) {
+      html.className = 'dark'
+      html.setAttribute('data-theme', 'modus-modern-dark')
+      html.setAttribute('data-mode', 'dark')
+    } else {
+      html.className = 'light'
+      html.setAttribute('data-theme', 'modus-modern-light')
+      html.setAttribute('data-mode', 'light')
+    }
+    // Save to localStorage
+    localStorage.setItem(
+      'modus-theme-config',
+      JSON.stringify({
+        theme: dark ? 'modus-modern-dark' : 'modus-modern-light',
+        mode: dark ? 'dark' : 'light',
+      })
+    )
+  }
+
+  const handleThemeToggle = (e: any) => {
+    const checked = e.detail?.target?.checked ?? false
+    setIsDarkMode(checked)
+    updateTheme(checked)
+  }
 
   const handleAddTodo = (text: string) => {
     if (!text.trim()) return
@@ -63,15 +109,13 @@ const App = () => {
 
   return (
     <>
-      <ModusWcNavbar visibility={navbarVisibility}>
-        <div slot="center">
-          <ModusWcTypography hierarchy="h2" size="lg" weight="semibold">
-            Modus Todo
-          </ModusWcTypography>
-        </div>
-        <div slot="end">
-          <ModusWcThemeSwitcher aria-label="Toggle theme" />
-        </div>
+      <ModusWcNavbar visibility={navbarVisibility} logo-solution="Modus Todo">
+        <ModusWcSwitch
+          slot="end"
+          value={isDarkMode}
+          onInputChange={handleThemeToggle}
+          aria-label="Toggle dark mode"
+        />
       </ModusWcNavbar>
       <div className="app-container">
         <div className="app-content">

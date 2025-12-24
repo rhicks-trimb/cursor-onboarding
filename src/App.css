@@ -1,6 +1,6 @@
 .app-container {
-  min-height: calc(100vh - 64px);
-  padding: var(--modus-wc-spacing-xl);
+  min-height: 100vh;
+  padding: var(--modus-wc-spacing-md);
   background-color: var(--modus-wc-color-base-page);
 }
 
