@@ -6,22 +6,22 @@ alwaysApply: true
 # Modus 2.0 Project Rules
 
 ## Setup Requirements
-- **Theme Wrapper**: All apps MUST be wrapped in <ModusWcThemeProvider> in main.tsx[cite: 46, 53].
-- **CSS Order**: Import @trimble-oss/moduswebcomponents/modus-wc-styles.css BEFORE Tailwind in index.css[cite: 60, 63].
-- **Icons**: Use the jsDelivr CDN for Modus icons: https://cdn.jsdelivr.net/npm/@trimble-oss/modus-icons@1/dist/modus-outlined/fonts/modus-icons.woff2[cite: 71, 154].
+- **Theme Wrapper**: All apps MUST be wrapped in <ModusWcThemeProvider> in main.tsx.
+- **CSS Order**: Import @trimble-oss/moduswebcomponents/modus-wc-styles.css BEFORE Tailwind in index.css.
+- **Icons**: Use the jsDelivr CDN for Modus icons: https://cdn.jsdelivr.net/npm/@trimble-oss/modus-icons@1/dist/modus-outlined/fonts/modus-icons.woff2.
 
 ## Component Usage & Event Handling
-- **Text Inputs**: Use <ModusWcTextInput>. Access values via e.detail?.target?.value[cite: 73, 74].
-- **Buttons**: Use <ModusWcButton> with the onButtonClick prop (NOT onClick)[cite: 86].
-- **Checkboxes**: Use <ModusWcCheckbox> with onInputChange[cite: 89, 90].
-- **Typography**: Always use the <ModusWcTypography> component for text[cite: 145].
+- **Text Inputs**: Use <ModusWcTextInput>. Access values via e.detail?.target?.value.
+- **Buttons**: Use <ModusWcButton> with the onButtonClick prop (NOT onClick).
+- **Checkboxes**: Use <ModusWcCheckbox> with onInputChange.
+- **Typography**: Always use the <ModusWcTypography> component for text.
+- **Navbar Layout**: Use <ModusWcNavbar>.
+  - Logo/Title: Prefer placing the logo and app title inside the <ModusWcNavbar> using slot="start".
+  - Slots: Use slot="start", slot="center", or slot="end".
+  - Theme Switch: The Theme Switch MUST go in slot="end".
 
 ## Design & Styling
-- **Colors**: NEVER use hex codes. Use CSS variables: --modus-wc-color-base-page (background), --modus-wc-color-base-content (text), and --modus-wc-color-base-100 (cards)[cite: 137, 139, 151, 156].
-- **Layout**: Use bordered={false} for cards by default[cite: 159].
-- **Spacing**: Set --padding-card to 1rem and use var(--modus-wc-spacing-xl) for vertical card margins[cite: 152, 153].
-- **Buttons**: Default to tertiary style; only one primary button per page[cite: 141, 142].
-**Navbar Layout**: Use `<ModusWcNavbar>`.
-  - Navbar Logo: Prefer placing the logo and app title inside the <ModusWcNavbar> using slot="start" for better layout control.
-  - Use `slot="start"`, `slot="center"`, or `slot="end"` for custom elements.
-  - The Theme Switch MUST go in `slot="end"`.
+- **Colors**: NEVER use hex codes. Use CSS variables: --modus-wc-color-base-page (background), --modus-wc-color-base-content (text), and --modus-wc-color-base-100 (cards).
+- **Layout**: Use bordered={false} for cards by default.
+- **Spacing**: Set --padding-card to 1rem and use var(--modus-wc-spacing-xl) for vertical card margins.
+- **Buttons**: Default to tertiary style; only one primary button per page.
