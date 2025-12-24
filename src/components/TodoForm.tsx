@@ -22,6 +22,11 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
     }
   }
 
+  const handleButtonClick = (e?: any) => {
+    e?.preventDefault?.()
+    handleSubmit(e)
+  }
+
   return (
     <form className="todo-form-container" onSubmit={handleSubmit}>
       <ModusWcTextInput
@@ -32,10 +37,10 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
         aria-label="New todo input"
       />
       <ModusWcButton
-        type="submit"
+        type="button"
         color="primary"
         variant="filled"
-        onButtonClick={handleSubmit}
+        onButtonClick={handleButtonClick}
         aria-label="Add todo"
       >
         Add Todo
