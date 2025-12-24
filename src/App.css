@@ -55,6 +55,38 @@
   flex: 1;
   word-break: break-word;
   color: var(--modus-wc-color-base-content);
+  margin: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Target the rendered Modus Typography element and its internal p tag */
+.todo-item-text.modus-wc-typography,
+.todo-item-text.modus-wc-text-md,
+.modus-wc-typography.todo-item-text,
+modus-wc-typography.todo-item-text {
+  margin: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.todo-item-text p,
+.todo-item-text.modus-wc-typography p,
+modus-wc-typography.todo-item-text p,
+modus-wc-typography.modus-wc-text-md p {
+  margin: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Target all Modus Typography elements within todo items */
+.todo-item-content modus-wc-typography.modus-wc-text-md,
+.todo-item-content modus-wc-typography.modus-wc-typography-weight-normal {
+  margin: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.todo-item-content modus-wc-typography.modus-wc-text-md p,
+.todo-item-content modus-wc-typography.modus-wc-typography-weight-normal p {
+  margin: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .todo-item-text.completed {
@@ -85,6 +117,16 @@
 
 .todo-header-stats {
   margin-top: var(--modus-wc-spacing-md);
+  color: var(--modus-wc-color-base-content);
+}
+
+.todo-item-badge {
+  border-radius: 9999px;
+}
+
+/* Style non-urgent badges (default/outlined) to be visible against card background */
+modus-wc-badge.todo-item-badge:not([color="danger"]) {
+  border-color: var(--modus-wc-color-base-300);
   color: var(--modus-wc-color-base-content);
 }
 

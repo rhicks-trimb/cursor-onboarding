@@ -21,3 +21,7 @@ alwaysApply: true
 - **Layout**: Use bordered={false} for cards by default[cite: 159].
 - **Spacing**: Set --padding-card to 1rem and use var(--modus-wc-spacing-xl) for vertical card margins[cite: 152, 153].
 - **Buttons**: Default to tertiary style; only one primary button per page[cite: 141, 142].
+**Navbar Layout**: Use `<ModusWcNavbar>`.
+  - Navbar Logo: Prefer placing the logo and app title inside the <ModusWcNavbar> using slot="start" for better layout control.
+  - Use `slot="start"`, `slot="center"`, or `slot="end"` for custom elements.
+  - The Theme Switch MUST go in `slot="end"`.

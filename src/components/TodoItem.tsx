@@ -5,6 +5,7 @@ import { ModusWcCheckbox } from '@trimble-oss/moduswebcomponents-react'
 import { ModusWcButton } from '@trimble-oss/moduswebcomponents-react'
 import { ModusWcTextInput } from '@trimble-oss/moduswebcomponents-react'
 import { ModusWcTypography } from '@trimble-oss/moduswebcomponents-react'
+import { ModusWcBadge } from '@trimble-oss/moduswebcomponents-react'
 
 interface TodoItemProps {
   todo: Todo
@@ -58,6 +59,10 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
     handleSaveEdit()
   }
 
+  const isUrgent = todo.text.toLowerCase().includes('urgent')
+  const badgeColor = isUrgent ? 'danger' : undefined
+  const badgeVariant = isUrgent ? 'filled' : 'outlined'
+
   return (
     <ModusWcCard className="todo-item-card" bordered={false}>
       <div className="todo-item-content">
@@ -99,11 +104,12 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
             </div>
           </form>
         ) : (
-          <>
-            <div 
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: 'var(--modus-wc-spacing-sm)' }}>
+            <ModusWcTypography 
+              hierarchy="p"
               className={`todo-item-text ${todo.completed ? 'completed' : ''}`}
               onClick={handleEditClick}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: 'pointer', flex: 1, margin: 0, marginBottom: 0 }}
               tabIndex={0}
               onKeyDown={(e: React.KeyboardEvent) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -113,10 +119,16 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
               }}
               aria-label={`Todo: ${todo.text}. Press Enter or Space to edit.`}
             >
-              <ModusWcTypography hierarchy="p">
-                {todo.text}
-              </ModusWcTypography>
-            </div>
+              {todo.text}
+            </ModusWcTypography>
+            <ModusWcBadge 
+              color={badgeColor}
+              size="sm" 
+              variant={badgeVariant}
+              customClass="todo-item-badge"
+            >
+              {isUrgent ? 'Urgent' : 'Normal'}
+            </ModusWcBadge>
             <div className="todo-item-actions">
               <ModusWcButton
                 color="tertiary"
@@ -137,7 +149,7 @@ const TodoItem = ({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) => {
                 Delete
               </ModusWcButton>
             </div>
-          </>
+          </div>
         )}
       </div>
     </ModusWcCard>
